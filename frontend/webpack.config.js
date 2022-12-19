@@ -27,7 +27,9 @@ module.exports = {
             template: path.resolve(__dirname, "public/index.html"),
             inject: true
         }),
-        new ESLintPlugin(),
+        new ESLintPlugin({
+            extensions: ['js', 'jsx'],
+        }),
     ],
     devServer: {
         port: 3000,

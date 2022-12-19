@@ -1,5 +1,5 @@
-import {COUNT_CITIES, EDIT_CITY, LOAD_CITIES, UPDATE_CITY} from "./CitiesActionTypes";
-import {get, put} from "../util/callBackendUtils";
+import {COUNT_CITIES, EDIT_CITY, LOAD_CITIES, UPDATE_CITY} from './CitiesActionTypes';
+import {get, put} from '../util/callBackendUtils';
 
 const getCitiesUrl = (nameFilter, pageSize, page) => (
     nameFilter ?
@@ -8,14 +8,14 @@ const getCitiesUrl = (nameFilter, pageSize, page) => (
 
 export const loadCityList = (dispatch, pageSize, page, nameFilter) => get(dispatch,
     {
-        url: getCitiesUrl(nameFilter, pageSize, page),
-        action: {type: LOAD_CITIES},
+      url: getCitiesUrl(nameFilter, pageSize, page),
+      action: {type: LOAD_CITIES},
     }
 );
 export const countCities = (dispatch, nameFilter) => get(dispatch,
     {
-        url: nameFilter ? `/cities/count/${nameFilter}` : '/cities/count',
-        action: {type: COUNT_CITIES}
+      url: nameFilter ? `/cities/count/${nameFilter}` : '/cities/count',
+      action: {type: COUNT_CITIES},
     }
 );
 export const updateCity = (dispatch, city) => put(dispatch,
@@ -23,6 +23,6 @@ export const updateCity = (dispatch, city) => put(dispatch,
 );
 
 export const editCity = (dispatch, city) => {
-    dispatch({type: EDIT_CITY, city});
+  dispatch({type: EDIT_CITY, city});
 };
 

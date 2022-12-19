@@ -21,12 +21,6 @@
     "test": "react-scripts test",
     "build-prod": "NODE_ENV=production npx webpack"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -40,6 +34,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-webpack-plugin": "^3.2.0",
     "react-scripts": "5.0.1",
