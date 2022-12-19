@@ -41,8 +41,9 @@ After that copy **frontend/dist/main.js** into **src/main/resources/public**
 
 ## TODO list
 * Backend: store users in the the DB instead of default config
+* Backend: data should be loaded once, not per each app run
 * Frontend+backend: enable CSRF and handle it on BE and FE
-* Backend: clarify "run it with little-to- zero effort." requirement and make app runnable one command in terminal if needed
+* Backend: clarify "run it with little-to- zero effort." requirement and make the app runnable in one command in terminal if needed
 * Backend: api doc(swagger?)
 * Backend: save updatedBy+timestamp for cities
 * Backend: chekstyle and enforcer maven plugins
