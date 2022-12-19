@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    "react", "react-hooks"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/all"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "parser": "@babel/eslint-parser",
+  "rules": {
+    "react/require-default-props": "off",
+    "react/forbid-prop-types": "off"
+  }
+}

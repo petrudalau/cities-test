@@ -1,0 +1,17 @@
+{
+  "cities.not.found": "No cities found.",
+  "column.name": "Name",
+  "column.photo": "Photo",
+  "column.action": "Actions",
+  "save.result.stored": "Successfully saved.",
+  "save.result.error": "Failed to save the city.",
+  "load.result.error": "Failed to load cities, please try again.",
+  "action.filter": "Find",
+  "action.filter.reset": "Cancel",
+  "action.edit": "Edit",
+  "action.save": "Save",
+  "action.close": "Close",
+  "pagination.pageSize": "Cities per page",
+  "pagination.of": "of",
+  "pagination.page": "Page"
+}

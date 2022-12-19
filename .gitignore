@@ -1,0 +1,6 @@
+frontend/node_modules
+.idea
+frontend/package-lock.json
+frontend/dist
+target
+cities.iml

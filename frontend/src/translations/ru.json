@@ -1,0 +1,17 @@
+{
+  "cities.not.found": "Города не найдены.",
+  "column.name": "Название",
+  "column.photo": "Фото",
+  "column.action": "Операции",
+  "save.result.stored": "Успешно сохранён.",
+  "save.result.error": "Не удалось сохранить",
+  "load.result.error": "Не удалось загрузить города, попробуйте позже.",
+  "action.filter": "Поиск",
+  "action.filter.reset": "Отмена",
+  "action.edit": "Редактировать",
+  "action.save": "Сохранить",
+  "action.close": "Закрыть",
+  "pagination.pageSize": "Городов на странице",
+  "pagination.of": "из",
+  "pagination.page": "Страница"
+}
