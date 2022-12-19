@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
@@ -74,15 +75,17 @@ public class MongoSpringDataCityRepositoryTest {
     public void updateCity() throws GenericCityException {
         CityEntity entity = CityEntity.builder().id("1").name("city1").photo("url1").build();
         when(springDataRepo.save(eq(entity))).thenReturn(entity);
-        City result = repository.updateCity(City.builder().id("1").name("city1").photo("url1").build());
+        City result = repository.updateCity(City.builder().id("1").name("city1").photo("url1").build(), "user");
         assertCity(entity, result);
+        assertEquals(entity.getLastUpdateBy(), "user");
+        assertNotNull(entity.getLastUpdateTime());
     }
 
     @Test(expected = GenericCityException.class)
     public void updateCity_exception() throws GenericCityException {
         CityEntity entity = CityEntity.builder().id("1").name("city1").photo("url1").build();
         when(springDataRepo.save(eq(entity))).thenThrow(new InvalidDataAccessApiUsageException("error"));
-        repository.updateCity(City.builder().id("1").name("city1").photo("url1").build());
+        repository.updateCity(City.builder().id("1").name("city1").photo("url1").build(), "user");
     }
 
     @Test

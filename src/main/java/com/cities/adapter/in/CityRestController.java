@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -94,10 +95,9 @@ public class CityRestController {
 
     @PreAuthorize("hasRole('ALLOW_EDIT')")
     @PutMapping("/{id}")
-    public ResponseEntity<CityDto> putById(
-            @RequestBody CityDto city) {
+    public ResponseEntity<CityDto> putById(@RequestBody CityDto city, Principal principal) {
         try {
-            City result = cityAggregate.updateCity(CityMapper.toCity(city));
+            City result = cityAggregate.updateCity(CityMapper.toCity(city), principal.getName());
             return ResponseEntity.ok(CityMapper.toCityDto(result));
         } catch (GenericCityException e) {
             log.error("Error occurred while updating city.", e);

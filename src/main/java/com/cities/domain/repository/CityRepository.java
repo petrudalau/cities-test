@@ -11,7 +11,7 @@ public interface CityRepository {
 
     boolean existsById(String id) throws GenericCityException;
 
-    City updateCity(City city) throws GenericCityException;
+    City updateCity(City city, String updatedBy) throws GenericCityException;
     List<City> search(SearchCriteria searchCriteria) throws GenericCityException;
 
     Long count(String name) throws GenericCityException;

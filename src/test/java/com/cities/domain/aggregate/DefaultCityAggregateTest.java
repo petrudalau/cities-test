@@ -17,10 +17,12 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultCityAggregateTest {
+    private static final String TEST_USER = "user_login";
     @Mock
     private CityRepository cityRepository;
     private DefaultCityAggregate aggregate;
@@ -54,8 +56,8 @@ public class DefaultCityAggregateTest {
     public void updateCity() throws GenericCityException, CityNotFoundException {
         City city = City.builder().id("1").name("city1").photo("url1").build();
         when(cityRepository.existsById(eq("1"))).thenReturn(true);
-        when(cityRepository.updateCity(eq(city))).thenReturn(city);
-        City result = aggregate.updateCity(city);
+        when(cityRepository.updateCity(eq(city), same(TEST_USER))).thenReturn(city);
+        City result = aggregate.updateCity(city, TEST_USER);
         assertSame(city, result);
     }
 
@@ -63,15 +65,15 @@ public class DefaultCityAggregateTest {
     public void updateCity_notFound() throws GenericCityException, CityNotFoundException {
         City city = City.builder().id("1").name("city1").photo("url1").build();
         when(cityRepository.existsById(eq("1"))).thenReturn(false);
-        aggregate.updateCity(city);
+        aggregate.updateCity(city, TEST_USER);
     }
 
     @Test(expected = GenericCityException.class)
     public void updateCity_exception() throws GenericCityException, CityNotFoundException {
         City city = City.builder().id("1").name("city1").photo("url1").build();
         when(cityRepository.existsById(eq("1"))).thenReturn(true);
-        when(cityRepository.updateCity(eq(city))).thenThrow(new GenericCityException(new RuntimeException()));
-        aggregate.updateCity(city);
+        when(cityRepository.updateCity(eq(city), same(TEST_USER))).thenThrow(new GenericCityException(new RuntimeException()));
+        aggregate.updateCity(city,TEST_USER);
     }
 
     @Test

@@ -15,22 +15,28 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CityRestControllerTest {
+    private static final String TEST_USER = "user_login";
+    @Mock
+    private Principal principal;
     @Mock
     private CityAggregate cityAggregate;
     private CityRestController controller;
 
     @Before
     public void init() {
+        when(principal.getName()).thenReturn(TEST_USER);
         controller = new CityRestController(cityAggregate);
     }
 
@@ -119,8 +125,8 @@ public class CityRestControllerTest {
     @Test
     public void putById() throws GenericCityException, CityNotFoundException {
         City city = City.builder().id("1").name("city").photo("url").build();
-        when(cityAggregate.updateCity(eq(city))).thenReturn(city);
-        ResponseEntity<CityDto> result = controller.putById(new CityDto("1", "city", "url"));
+        when(cityAggregate.updateCity(eq(city), same(TEST_USER))).thenReturn(city);
+        ResponseEntity<CityDto> result = controller.putById(new CityDto("1", "city", "url"), principal);
         assertEquals(HttpStatusCode.valueOf(200), result.getStatusCode());
         assertCity(city, result.getBody());
     }
@@ -128,15 +134,15 @@ public class CityRestControllerTest {
     @Test(expected = ResponseStatusException.class)
     public void putById_exception() throws GenericCityException, CityNotFoundException {
         City city = City.builder().id("1").name("city").photo("url").build();
-        when(cityAggregate.updateCity(eq(city))).thenThrow(new GenericCityException(new RuntimeException()));
-        controller.putById(new CityDto("1", "city", "url"));
+        when(cityAggregate.updateCity(eq(city), same(TEST_USER))).thenThrow(new GenericCityException(new RuntimeException()));
+        controller.putById(new CityDto("1", "city", "url"), principal);
     }
 
     @Test(expected = ResponseStatusException.class)
     public void putById_notFound() throws GenericCityException, CityNotFoundException {
         City city = City.builder().id("1").name("city").photo("url").build();
-        when(cityAggregate.updateCity(eq(city))).thenThrow(new CityNotFoundException());
-        controller.putById(new CityDto("1", "city", "url"));
+        when(cityAggregate.updateCity(eq(city), same(TEST_USER))).thenThrow(new CityNotFoundException());
+        controller.putById(new CityDto("1", "city", "url"), principal);
     }
 
     private void assertCity(City city, CityDto dto) {

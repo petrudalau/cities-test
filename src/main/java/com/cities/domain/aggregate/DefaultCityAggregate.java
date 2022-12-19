@@ -27,12 +27,12 @@ public class DefaultCityAggregate implements CityAggregate {
     }
 
     @Override
-    public City updateCity(City city) throws GenericCityException, CityNotFoundException {
+    public City updateCity(City city, String updatedBy) throws GenericCityException, CityNotFoundException {
         if (!cityRepository.existsById(city.getId())) {
             log.error("City with id={} not found", city.getId());
             throw new CityNotFoundException();
         }
-        return cityRepository.updateCity(city);
+        return cityRepository.updateCity(city, updatedBy);
     }
 
     @Override

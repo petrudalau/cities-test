@@ -9,8 +9,6 @@ public class CityMapper {
                 .id(entity.getId())
                 .name(entity.getName())
                 .photo(entity.getPhoto())
-                .lastUpdateBy(entity.getLastUpdateBy())
-                .lastUpdateTime(entity.getLastUpdateTime())
                 .build();
     }
 
@@ -19,8 +17,6 @@ public class CityMapper {
                 .id(entity.getId())
                 .name(entity.getName())
                 .photo(entity.getPhoto())
-                .lastUpdateBy(entity.getLastUpdateBy())
-                .lastUpdateTime(entity.getLastUpdateTime())
                 .build();
     }
 }

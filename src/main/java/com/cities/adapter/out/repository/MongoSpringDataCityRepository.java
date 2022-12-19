@@ -1,6 +1,7 @@
 package com.cities.adapter.out.repository;
 
 import com.cities.adapter.out.mapper.CityMapper;
+import com.cities.adapter.out.repository.mongo.model.CityEntity;
 import com.cities.domain.entity.City;
 import com.cities.domain.exception.GenericCityException;
 import com.cities.domain.repository.CityRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,9 +44,12 @@ public class MongoSpringDataCityRepository implements CityRepository {
     }
 
     @Override
-    public City updateCity(City city) throws GenericCityException {
+    public City updateCity(City city, String updatedBy) throws GenericCityException {
         try {
-            return CityMapper.toCity(mongoCityRepository.save(CityMapper.toCityEntity(city)));
+            CityEntity entity = CityMapper.toCityEntity(city);
+            entity.setLastUpdateBy(updatedBy);
+            entity.setLastUpdateTime(Instant.now());
+            return CityMapper.toCity(mongoCityRepository.save(entity));
         } catch (Exception e) {
             log.error("Failed to update city.", e);
             throw new GenericCityException(e);
