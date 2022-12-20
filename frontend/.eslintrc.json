@@ -17,6 +17,7 @@
     "react/jsx-closing-tag-location": "off",
     "jsx-a11y/alt-text": "off",
     "react/require-default-props": "off",
+    "new-cap": "off",
     "react/forbid-prop-types": "off",
     "max-len": ["error", 120, 2, {
       "ignoreUrls": true,

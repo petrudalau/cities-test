@@ -47,7 +47,7 @@ After that copy **frontend/dist/main.js** into **src/main/resources/public**
 * Backend: api doc(swagger?)
 * Backend: chekstyle and enforcer maven plugins
 * Backend: javadocs
-* Frontend: proper eslint config
+* Frontend+Backend: CI?
 * Frontend: performance optimizations/review unnecessary re-renders
 * Frontend: review error in `npm audit`
 * Frontend: tests for components separately
